@@ -5,8 +5,10 @@ export BORG_REPO=ssh://user@domain.com//mnt/borg/archive
 
 # Setting this, so you won't be asked for your repository passphrase:
 export BORG_PASSPHRASE='xxxxxxxxxxxx'
+
 # or this to ask an external program to supply the passphrase:
 #export BORG_PASSCOMMAND='pass show backup'
+
 # Mount point
 export BORG_MOUNTPOINT='/mnt/borg'
 
