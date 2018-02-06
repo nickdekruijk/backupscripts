@@ -1,0 +1,4 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+0 2 * * * root /root/mysqlbackup.sh
+0 3 * * * root /root/borg.sh &> /var/log/borg
+
