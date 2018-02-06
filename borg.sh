@@ -75,7 +75,7 @@ borg create                         \
     /etc                            \
     /home                           \
     /root                           \
-    /usr                           \
+    /usr                            \
     /var                            \
 
 backup_exit=$?
