@@ -15,13 +15,16 @@ passwd=xxxxxx
 databases=`mysql -u $user -p$passwd -e "SHOW DATABASES;" | tr -d "| " | grep -v Database`
 
 verbose=0
+gzip=0
 
-while getopts "vVh" opt; do
+while getopts "vVhz" opt; do
     case $opt in
         v) verbose=1 ;;
         V) verbose=2 ;;
+        z) gzip=1 ;;
         h) echo "Usage: $0 [-v | -V]
 
+-z   create tar.gz archive for database
 -v   verbose (show database name)
 -V   more verbose (show table name too)"; exit ;;
        \?) echo "Invalid option: -$OPTARG" >&2 ;;
@@ -41,5 +44,13 @@ for db in $databases; do
             fi
             mysqldump --skip-comments -u $user -p$passwd $db $table > $backupdir/$db/$table.sql
         done
+        if (( $gzip>=1 )) ; then
+            if (( $verbose>=1 )) ; then
+                echo "Creating: $db.tar.gz"
+            fi
+            cd $backupdir
+            tar -zcf $db.tar.gz $db/
+            rm -rf $backupdir/$db/
+        fi
     fi
 done
