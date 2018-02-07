@@ -34,7 +34,7 @@ for db in $databases; do
             echo "Dumping database: $db"
         fi
         mkdir -p $backupdir/$db
-        tables=`mysql -u $user -p$passwd -N -B -e "SHOW TABLES FROM $db;"`
+        tables=`mysql -u $user -p$passwd -N -B -e 'SHOW TABLES FROM \`'$db'\`;'`
         for table in $tables; do
             if (( $verbose>=2 )) ; then
                 echo - $table
